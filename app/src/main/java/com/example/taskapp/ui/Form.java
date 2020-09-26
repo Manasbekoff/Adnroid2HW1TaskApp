@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,5 +39,13 @@ public class Form extends Fragment {
     }
 
     private void save() {
+        String text = editText.getText().toString();
+        String time;
+        Bundle bundle = new Bundle();
+        bundle.putString("task", text);
+
+        getParentFragmentManager().setFragmentResult("form", bundle);
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+        navController.navigateUp();
     }
 }

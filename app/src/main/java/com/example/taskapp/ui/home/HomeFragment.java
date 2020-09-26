@@ -1,6 +1,7 @@
 package com.example.taskapp.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,14 +32,19 @@ public class HomeFragment extends Fragment {
     Boolean menuOpen=false;
     NavController navController, navControllerTwo;
     Animation oneFabOpen, oneFabClose;
-
-
-    OvershootInterpolator interpolator = new OvershootInterpolator();
+    private RecyclerView recyclerView;
+    private TaskAdapter adapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter= new TaskAdapter();
     }
 
     @Override
@@ -45,6 +54,8 @@ public class HomeFragment extends Fragment {
         fab_one =view.findViewById(R.id.prof_fab);
         fabAddForm=view.findViewById(R.id.form_fab);
 
+        recyclerView=view.findViewById(R.id.recyclerView);
+
         profileText = view.findViewById(R.id.textViewProf);
         formTextView=view.findViewById(R.id.textViewForm);
 
@@ -53,6 +64,12 @@ public class HomeFragment extends Fragment {
        oneFabClose=AnimationUtils.loadAnimation(getActivity(),R.anim.close_anim);
 
         initListeners();
+        initList();
+    }
+
+    private void initList() {
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
     }
 
     private void initListeners() {
@@ -89,8 +106,13 @@ public class HomeFragment extends Fragment {
                 openMenu();
             }
         });
-
-
+        getParentFragmentManager().setFragmentResultListener("form", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                Log.e("TAG", "onFragmentResult: " + result.getString("task"));
+                adapter.setItem(result.getString("task"));
+            }
+        });
     }
 
     private void openMenu() {

@@ -45,7 +45,12 @@ public class Profile extends Fragment {
         textView=view.findViewById(R.id.txtView);
         imageView=view.findViewById(R.id.imgView_prof);
 
-        chooseImage();
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseImage();
+            }
+        });
 
 
     }
