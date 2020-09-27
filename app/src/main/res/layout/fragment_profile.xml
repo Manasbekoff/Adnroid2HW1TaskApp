@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="18dp"
-    tools:context=".ui.Profile">
+    tools:context=".ui.ProfileFragment">
     
     <LinearLayout
         android:layout_width="wrap_content"

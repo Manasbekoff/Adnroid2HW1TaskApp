@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 import com.example.taskapp.R;
 
-public class Form extends Fragment {
+public class FormFragment extends Fragment {
 
     private EditText editText;
 

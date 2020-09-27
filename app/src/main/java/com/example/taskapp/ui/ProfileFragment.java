@@ -22,7 +22,7 @@ import com.example.taskapp.R;
 import static android.app.Activity.RESULT_OK;
 
 
-public class Profile extends Fragment {
+public class ProfileFragment extends Fragment {
 
     private static int LOAD_IMG = 7;
 

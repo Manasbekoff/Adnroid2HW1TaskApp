@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="40dp"
-    tools:context=".ui.Profile">
+    tools:context=".ui.ProfileFragment">
 
 
     <EditText

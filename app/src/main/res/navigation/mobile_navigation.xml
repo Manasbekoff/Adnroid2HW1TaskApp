@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_navigation_home_to_form"
             app:destination="@id/form" />
+        <action
+            android:id="@+id/action_navigation_home_to_boardFragment"
+            app:destination="@id/boardFragment" />
     </fragment>
 
     <fragment
@@ -31,11 +34,16 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.taskapp.ui.Profile"
+        android:name="com.example.taskapp.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/form"
-        android:name="com.example.taskapp.ui.Form"
+        android:name="com.example.taskapp.ui.FormFragment"
         android:label="fragment_form" />
+    <fragment
+        android:id="@+id/boardFragment"
+        android:name="com.example.taskapp.onBoarding.BoardFragment"
+        android:label="fragment_board"
+        tools:layout="@layout/fragment_board" />
 </navigation>
